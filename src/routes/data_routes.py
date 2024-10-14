@@ -1,7 +1,11 @@
-from fastapi import FastAPI, UploadFile, APIRouter, File
+from fastapi import UploadFile, APIRouter, File
+
+from src.domain.data_processor import DataProcessor
 
 router = APIRouter()
 
-@router.get("/ola")
-async def ola():
-    return {"menssagem": "olá".encode("utf-8")}
+data_processor = DataProcessor()
+
+@router.post("/importar-clientes/")
+async def importar_clientes(file : UploadFile = File(...)):
+    return await data_processor.upload_clientes(file)
