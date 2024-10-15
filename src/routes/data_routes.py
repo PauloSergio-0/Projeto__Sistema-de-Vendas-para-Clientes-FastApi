@@ -13,3 +13,7 @@ async def importar_clientes(file : UploadFile = File(...)):
 @router.post("/importar-produtos/")
 async def importar_produtos(file : UploadFile = File(...)):
     return await data_processor.importar_produtos(file)
+
+@router.post("/importar-vendas/")
+async def importar_vendas(file : UploadFile = File(...)):
+    return await data_processor.importar_vendas(file)
