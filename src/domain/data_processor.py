@@ -2,11 +2,11 @@ import csv
 import os
 
 from fastapi import UploadFile, HTTPException, status
-
+from data.data_memo import Data_Memory
 
 class DataProcessor:
     def __init__(self):
-        pass
+        self.data_save = Data_Memory
 
     async def upload_clientes(self, file: UploadFile):
 
@@ -28,8 +28,10 @@ class DataProcessor:
                         "Contato": linha["Contato"]
                     }
                     clientes.append(cliente)
-
-                return {"clientes": clientes}
+                    
+                self.data_save.clientes = clientes
+                
+                return {"clientes": "Adicianados com sucesso"}
 
             except Exception as e:
                 raise HTTPException(
@@ -41,3 +43,23 @@ class DataProcessor:
                 status_code=status.HTTP_406_NOT_ACCEPTABLE,
                 detail="Apenas arquivos CSV são aceitos"
             )
+
+
+    async def exportar_cliente(self):
+        if self.data_save.clientes:
+            try:
+            
+                return {self.data_save.clientes}
+            
+            except Exception as e:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=f"Falha ao enviar o arquivo CSV: {str(e)}"
+                )
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_406_NOT_ACCEPTABLE,
+                detail="Apenas arquivos CSV são aceitos"
+            )
+            
+    
