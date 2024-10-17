@@ -1,7 +1,7 @@
 import csv
 import os
 
-from fastapi import UploadFile, HTTPException, status
+from fastapi import UploadFile, HTTPException, status, requests
 
 
 class DataProcessor:
@@ -131,4 +131,17 @@ class DataProcessor:
             raise HTTPException(
                 status_code=status.HTTP_406_NOT_ACCEPTABLE,
                 detail="Apenas arquivos CSV são aceitos"
+            )
+            
+    def exportar_json(self, tipo_data):
+        if tipo_data == "Cliente":
+            URL = ""
+        elif tipo_data == "Produto":
+            URL = ""
+        elif tipo_data == "Venda":
+            URL = ""
+        else:
+            raise  HTTPException(
+                status_code=status.HTTP_406_NOT_ACCEPTABLE,
+                detail="Não foi possivel exportar json, Erro:Tipo"
             )
