@@ -2,11 +2,11 @@ import csv
 import os
 
 from fastapi import UploadFile, HTTPException, status
-
+from service.api_flask import APIFlask
 
 class DataProcessor:
     def __init__(self):
-        self.data_save = Data_Memory
+        pass
 
     async def upload_clientes(self, file: UploadFile):
 
@@ -35,7 +35,8 @@ class DataProcessor:
                         "endereco": linha["Endereço"],
                         "contato": linha["Contato"]
                     }
-                    clientes.append(cliente)
+                    APIFlask.send_data(data = cliente, type_data = "Cliente")
+                    # clientes.append(cliente)
 
                 return {"clientes": clientes}
 
