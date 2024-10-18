@@ -1,6 +1,6 @@
 from fastapi import UploadFile, APIRouter, File
 
-from src.domain.data_processor import DataProcessor
+from domain.data_processor import DataProcessor
 
 router = APIRouter()
 
@@ -17,7 +17,3 @@ async def importar_produtos(file : UploadFile = File(...)):
 @router.post("/importar-vendas/")
 async def importar_vendas(file : UploadFile = File(...)):
     return await data_processor.importar_vendas(file)
-
-@router.get("/exportar-clientes")
-async def exportar_clientes():
-    return await data_processor.exportar_cliente()
