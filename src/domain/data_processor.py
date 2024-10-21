@@ -6,7 +6,7 @@ from service.api_flask import APIFlask
 
 class DataProcessor:
     def __init__(self):
-        self.api_flasck = APIFlask()
+        self.api_flask = APIFlask()
 
     async def upload_clientes(self, file: UploadFile):
 
@@ -36,7 +36,7 @@ class DataProcessor:
                         "contato": linha["Contato"]
                     }
                     
-                    self.api_flasck.send_data(data= cliente, type_data="cliente")
+                    self.api_flask.send_data(data= cliente, type_data="cliente")
 
 
                 return {"menssage" : "Dados do Cliente enviado com sucesso"}
@@ -79,7 +79,7 @@ class DataProcessor:
                         "preco": linha["Preço"]
                     }
                     
-                    self.api_flasck.send_data(produto, type_data="produto")
+                    self.api_flask.send_data(produto, type_data="produto")
 
 
                 return {"menssage" : "Dados do Produto enviado com sucesso"}
@@ -121,7 +121,7 @@ class DataProcessor:
                         "quantidade": linha["Quantidade"],
                         "data_da_venda": linha["Data da Venda"]
                     }
-                    self.api_flasck.send_data(venda, type_data="venda")
+                    self.api_flask.send_data(venda, type_data="venda")
 
 
                 return {"menssage" : "Dados de Venda enviado com sucesso"}
