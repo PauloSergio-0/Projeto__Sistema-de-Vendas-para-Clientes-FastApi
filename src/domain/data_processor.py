@@ -2,7 +2,7 @@ import csv
 import os
 
 from fastapi import UploadFile, HTTPException, status, requests
-from service.api_flask import APIFlask
+from Service.api_flask import APIFlask
 
 class DataProcessor:
     def __init__(self):
