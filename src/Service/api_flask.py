@@ -1,5 +1,7 @@
 from settings.config import Config
+from fastapi import HTTPException
 import requests
+
 class APIFlask:
     def __init__(self):
         self.cliente = Config.URL_CLIENTE
@@ -19,7 +21,7 @@ class APIFlask:
         elif type_data == "venda":
             url = self.venda
         else:
-            raise {'Error': "tipo não autorizado"}
+            raise HTTPException(status_code=400, detail="Tipo não autorizado")
         
         try:
             
@@ -29,4 +31,4 @@ class APIFlask:
             response.raise_for_status()
             
         except requests.exceptions.HTTPError as e :
-            raise {"error": f"{(str(e))}"}
+            raise HTTPException(status_code=response.status_code, detail=str(e))
