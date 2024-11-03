@@ -26,8 +26,6 @@ class DataProcessor:
                             "o CSV deve conter informações do ID, nome, endereço e contato."
                     )
 
-
-
                 for linha in csv_reader:
                     cliente = {
                         "id": linha["ID"],
@@ -38,9 +36,7 @@ class DataProcessor:
                     
                     self.api_flask.send_data(data= cliente, type_data="cliente")
 
-
                 return {"menssage" : "Dados do Cliente enviado com sucesso"}
-
             except Exception as e:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
@@ -55,7 +51,6 @@ class DataProcessor:
     async def importar_produtos(self, file: UploadFile):
         if file.filename.endswith('.csv'):
             try:
-
                 data = await file.read()
                 decoded_data = data.decode('utf-8').splitlines()
 
@@ -69,7 +64,6 @@ class DataProcessor:
                             "o CSV deve conter informações do ID, nome, código, categoria e preço."
                     )
 
-
                 for linha in csv_reader:
                     produto = {
                         "id": linha["ID"],
@@ -78,13 +72,10 @@ class DataProcessor:
                         "categoria": linha["Categoria"],
                         "preco": linha["Preço"]
                     }
-                    
+
                     self.api_flask.send_data(produto, type_data="produto")
 
-
                 return {"menssage" : "Dados do Produto enviado com sucesso"}
-
-
             except Exception as e:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
@@ -113,7 +104,6 @@ class DataProcessor:
                                "o CSV deve conter informações do ID do cliente e produto, quantidade data da venda."
                     )
 
-
                 for linha in csv_reader:
                     venda = {
                         "id_do_cliente": linha["ID do Cliente"],
@@ -123,9 +113,7 @@ class DataProcessor:
                     }
                     self.api_flask.send_data(venda, type_data="venda")
 
-
                 return {"menssage" : "Dados de Venda enviado com sucesso"}
-
             except Exception as e:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,

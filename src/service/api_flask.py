@@ -1,5 +1,6 @@
 from settings.config import Config
 import requests
+
 class APIFlask:
     def __init__(self):
         self.cliente = Config.URL_CLIENTE
@@ -22,11 +23,7 @@ class APIFlask:
             raise {'Error': "tipo não autorizado"}
         
         try:
-            
-
             response = requests.post(url, json=data)
-
             response.raise_for_status()
-            
         except requests.exceptions.HTTPError as e :
             raise {"error": f"{(str(e))}"}
